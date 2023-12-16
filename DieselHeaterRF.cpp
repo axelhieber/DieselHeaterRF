@@ -228,8 +228,9 @@ void DieselHeaterRF::initRadio() {
   writeReg(CC1101::ADDR,      0x00); // ADDR
   writeReg(CC1101::SYNC1,     0x7E); // SYNC1
   writeReg(CC1101::SYNC0,     0x3C); // SYNC0
-  
 
+  
+  
   char patable[8] = {0x00, 0x12, 0x0E, 0x34, 0x60, 0xC5, 0xC1, 0xC0};
   writeBurst(0x7E, 8, patable); // PATABLE
 
