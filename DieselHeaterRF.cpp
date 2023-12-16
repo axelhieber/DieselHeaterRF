@@ -184,10 +184,15 @@ bool DieselHeaterRF::receivePacket(char *bytes, uint16_t timeout) {
   return false;
 
 }
-
+cc1101_state_t DieselHeaterRF::testRadio() {
+  return({false,0,0,0});
+}
+cc1101_state_t DieselHeaterRF::statusRadio() {
+  return({false,0,0,0});
+}
 void DieselHeaterRF::initRadio() {
 
-  writeStrobe(0x30); // SRES
+  writeStrobe(CC1101::SRES); // SRES
 
   delay(100);
 
@@ -248,7 +253,7 @@ void DieselHeaterRF::txBurst(uint8_t len, char *bytes) {
     txFlush();
     //cc1101_writeReg(0x3F, len);
     writeBurst(0x7F, len, bytes);
-    writeStrobe(0x35); // STX
+    writeStrobe(CC1101::STX); // STX
 }
 
 void DieselHeaterRF::txFlush() {

@@ -118,7 +118,14 @@ enum class CC1101 {
     SFRX            =0x3A,
     SFTX            =0x3B,
     SWORRST         =0x3C,
-    SNOP            =0x3D
+    SNOP            =0x3D,
+
+    Write_Single_Byte     =0x00,
+    Write_Burst           =0x40,    
+    Read_Single_Byte      =0x80,
+    Read_Burst            =0xC0,
+
+    
 };
 
 
@@ -134,10 +141,12 @@ typedef struct {
   int16_t rssi        = 0;
 } heater_state_t;
 
-typedef struct{       // Reset      R/W     Description 
-  uint8_t partnum =0; // 0          R       Chip part number
-  uint8_t version =0; // 20         R       Chip version number. Subject to change without notice.
-  uint8_t rssi    =0;  //            R       Received signal strength indicator 
+typedef struct{   
+    bool failed     =true;
+                        // Reset      R/W     Description 
+    uint8_t partnum =0; // 0          R       Chip part number
+    uint8_t version =0; // 20         R       Chip version number. Subject to change without notice.
+    uint8_t rssi    =0; //            R       Received signal strength indicator 
   /* FREQOFF_EST
      LQI
      MARCSTATE 
@@ -148,8 +157,7 @@ typedef struct{       // Reset      R/W     Description
      TXBYTES
      RXBYTES */
 
-}
-cc1101_state_t;
+}cc1101_state_t;
 
 class DieselHeaterRF
 {
@@ -162,6 +170,10 @@ class DieselHeaterRF
 
     uint32_t _heaterAddr = 0;
     uint8_t _packetSeq = 0;
+
+    cc1101_state_t testRadio();
+    
+    cc1101_state_t statusRadio();
 
     void initRadio();
 
