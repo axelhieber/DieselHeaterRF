@@ -230,15 +230,15 @@ void DieselHeaterRF::initRadio() {
   writeReg(CC1101::SYNC0,     0x3C); // SYNC0
 
   
-  
+
   char patable[8] = {0x00, 0x12, 0x0E, 0x34, 0x60, 0xC5, 0xC1, 0xC0};
   writeBurst(0x7E, 8, patable); // PATABLE
 
-  writeStrobe(0x31); // SFSTXON  
-  writeStrobe(0x36); // SIDLE  
-  writeStrobe(0x3B); // SFTX  
-  writeStrobe(0x36); // SIDLE  
-  writeStrobe(0x3A); // SFRX  
+  writeStrobe(CC1101::SFSTXON); // SFSTXON  
+  writeStrobe(CC1101::SIDLE); // SIDLE  
+  writeStrobe(CC1101::SFRX); // SFTX  
+  writeStrobe(CC1101::SIDLE); // SIDLE  
+  writeStrobe(CC1101::SFRX); // SFRX  
 
   delay(136);  
  
@@ -252,8 +252,8 @@ void DieselHeaterRF::txBurst(uint8_t len, char *bytes) {
 }
 
 void DieselHeaterRF::txFlush() {
-  writeStrobe(0x36); // SIDLE
-  writeStrobe(0x3B); // SFTX
+  writeStrobe(CC1101::SIDLE); // SIDLE
+  writeStrobe(CC1101::SFTX); // SFTX
   delay(16); // Needed to prevent TX underflow if bursting right after flushing
 }
 
@@ -264,14 +264,14 @@ void DieselHeaterRF::rx(uint8_t len, char *bytes) {
 }
 
 void DieselHeaterRF::rxFlush() {
-  writeStrobe(0x36); // SIDLE  
+  writeStrobe(CC1101::SIDLE); // SIDLE  
   writeReg(0xBF, 0xFF); // Dummy read to de-assert GDO2
-  writeStrobe(0x3A); // SFRX
+  writeStrobe(CC1101::SFRX); // SFRX
   delay(16);
 }
 
 void DieselHeaterRF::rxEnable() {
-  writeStrobe(0x34); // SRX  
+  writeStrobe(CC1101::SRX); // SRX  
 }
 
 uint8_t DieselHeaterRF::writeReg(uint8_t addr, uint8_t val) {
