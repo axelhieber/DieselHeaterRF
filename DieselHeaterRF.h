@@ -121,6 +121,7 @@ enum class CC1101 {
     SNOP            =0x3D
     };
 
+
 typedef struct {
   uint8_t state       = 0;
   uint8_t power       = 0;
