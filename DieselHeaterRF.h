@@ -102,7 +102,7 @@ enum class CC1101 {
     TXBYTES         =0x3A,
     RXBYTES         =0x3B,
     RCCTRL1_STATUS  =0x3C,
-    RCCTRL0_STATUS  =0x3D
+    RCCTRL0_STATUS  =0x3D,
 
     // Command Strobes R/W - Single Byte
     SRES            =0x30, 
