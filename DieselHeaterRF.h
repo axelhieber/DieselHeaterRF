@@ -119,7 +119,7 @@ enum class CC1101 {
     SFTX            =0x3B,
     SWORRST         =0x3C,
     SNOP            =0x3D
-    };
+};
 
 
 typedef struct {
@@ -137,7 +137,7 @@ typedef struct {
 typedef struct{       // Reset      R/W     Description 
   uint8_t partnum =0; // 0          R       Chip part number
   uint8_t version =0; // 20         R       Chip version number. Subject to change without notice.
-  uint8_t rssi    =0  //            R       Received signal strength indicator 
+  uint8_t rssi    =0;  //            R       Received signal strength indicator 
   /* FREQOFF_EST
      LQI
      MARCSTATE 
@@ -149,7 +149,7 @@ typedef struct{       // Reset      R/W     Description
      RXBYTES */
 
 }
-cc1101 CC1101
+cc1101_state_t;
 
 class DieselHeaterRF
 {
