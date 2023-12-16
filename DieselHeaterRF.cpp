@@ -185,10 +185,10 @@ bool DieselHeaterRF::receivePacket(char *bytes, uint16_t timeout) {
 
 }
 cc1101_state_t DieselHeaterRF::testRadio() {
-  return(cc1101_state_t(false,0,0,0));
+  return {false,0,0,0};
 }
 cc1101_state_t DieselHeaterRF::statusRadio() {
-  return(cc1101_state_t(false,0,0,0));
+  return {false,0,0,0};
 }
 void DieselHeaterRF::initRadio() {
 
