@@ -173,6 +173,7 @@ class DieselHeaterRF
     void rxEnable();  
 
     uint8_t writeReg(uint8_t addr, uint8_t val);
+    uint8_t writeReg(CC1101 addr, uint8_t val){writeReg((int)addr,val);}
     void writeBurst(uint8_t addr, uint8_t len, char *bytes);
     void writeStrobe(uint8_t addr);
 
@@ -187,15 +188,13 @@ class DieselHeaterRF
 
     public:
 
-        DieselHeaterRF():DieselHeaterRF(HEATER_SCK_PIN,HEATER_MISO_PIN,HEATER_MOSI_PIN,HEATER_SS_PIN,HEATER_GDO2_PIN) {}
-
-
-        DieselHeaterRF(uint8_t sck, uint8_t miso, uint8_t mosi, uint8_t ss, uint8_t gdo2):
-                         _pinSck {sck}
-                         _pinMiso{miso}
-                         _pinMosi{mosi}
-                         _pinSs  {ss}
-                         _pinGdo2{gdo2}{}
+        DieselHeaterRF(uint8_t sck=HEATER_SCK_PIN, uint8_t miso=HEATER_MISO_PIN, uint8_t mosi=HEATER_MOSI_PIN, uint8_t ss=HEATER_SS_PIN, uint8_t gdo2=HEATER_GDO2_PIN){
+            _pinSck=sck;
+            _pinMiso=miso;
+            _pinMosi=mosi;
+            _pinSs=ss;
+            _pinGdo2=gdo2;
+        }
 
         void begin();
         void begin(uint32_t heaterAddr);
